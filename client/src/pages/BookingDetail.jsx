@@ -25,7 +25,7 @@ const BookingDetail = () => {
         try {
             const { data } = await API.get(`/bookings/${id}`);
             setBooking(data.data);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Booking not found');
             navigate('/bookings');
         } finally {
@@ -64,7 +64,7 @@ const BookingDetail = () => {
             toast.success('💰 Payment confirmed!');
             setQrCode(null);
             fetchBooking();
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to confirm payment');
         } finally {
             setPayConfirming(false);

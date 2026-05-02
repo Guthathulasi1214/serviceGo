@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const QRPaymentPage = () => {
     const { bookingId } = useParams();
-    const { user } = useAuth();
+    useAuth();
     const navigate = useNavigate();
     const [booking, setBooking] = useState(null);
     const [qrData, setQrData] = useState(null);
@@ -49,7 +49,7 @@ const QRPaymentPage = () => {
                     }
                 } catch { /* ignore */ }
             }, 5000);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to load booking');
             navigate('/bookings');
         } finally {
@@ -62,7 +62,7 @@ const QRPaymentPage = () => {
         try {
             const { data } = await API.post('/payments/qr', { bookingId });
             setQrData(data.data);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to generate QR code');
         } finally {
             setQrLoading(false);

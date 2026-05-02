@@ -5,7 +5,7 @@ import { Users, Package, ShoppingBag, DollarSign, CheckCircle, XCircle, Star, Re
 import toast from 'react-hot-toast';
 
 const AdminDashboard = () => {
-    const { user } = useAuth();
+    const { user: _user } = useAuth();
     const [tab, setTab] = useState('overview');
     const [stats, setStats] = useState(null);
     const [users, setUsers] = useState([]);
@@ -25,7 +25,7 @@ const AdminDashboard = () => {
         try {
             const { data } = await API.get('/admin/stats');
             setStats(data.data);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to load stats');
         } finally {
             setLoading(false);
@@ -36,21 +36,21 @@ const AdminDashboard = () => {
         try {
             const { data } = await API.get('/admin/users', { params: { limit: 50 } });
             setUsers(data.data || []);
-        } catch (err) { toast.error('Failed to load users'); }
+        } catch (_err) { toast.error('Failed to load users'); }
     };
 
     const fetchServices = async () => {
         try {
             const { data } = await API.get('/admin/services', { params: { status: svcFilter, limit: 50 } });
             setServices(data.data || []);
-        } catch (err) { toast.error('Failed to load services'); }
+        } catch (_err) { toast.error('Failed to load services'); }
     };
 
     const fetchBookings = async () => {
         try {
             const { data } = await API.get('/admin/bookings', { params: { limit: 50 } });
             setBookings(data.data || []);
-        } catch (err) { toast.error('Failed to load bookings'); }
+        } catch (_err) { toast.error('Failed to load bookings'); }
     };
 
     const approveService = async (id) => {
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
             toast.success('Service approved! ✅');
             fetchServices();
             fetchStats();
-        } catch (err) { toast.error('Failed to approve'); }
+        } catch (_err) { toast.error('Failed to approve'); }
     };
 
     const rejectService = async (id) => {
@@ -69,7 +69,7 @@ const AdminDashboard = () => {
             toast.success('Service rejected');
             fetchServices();
             fetchStats();
-        } catch (err) { toast.error('Failed to reject'); }
+        } catch (_err) { toast.error('Failed to reject'); }
     };
 
     const verifyProvider = async (id) => {
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
             await API.put(`/admin/users/${id}/verify`);
             toast.success('Provider verified! ✅');
             fetchUsers();
-        } catch (err) { toast.error('Failed to verify'); }
+        } catch (_err) { toast.error('Failed to verify'); }
     };
 
     const confirmPayment = async (bookingId) => {
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
             toast.success('Payment confirmed! 💰');
             fetchBookings();
             fetchStats();
-        } catch (err) { toast.error('Failed to confirm payment'); }
+        } catch (_err) { toast.error('Failed to confirm payment'); }
     };
 
     const tabs = [

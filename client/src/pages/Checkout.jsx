@@ -22,7 +22,7 @@ const Checkout = () => {
         try {
             const saved = localStorage.getItem('savedAddress');
             if (saved) return JSON.parse(saved);
-        } catch { }
+        } catch { /* ignore parse errors */ }
         return { street: '', city: '', state: '', zip: '' };
     });
 
@@ -70,12 +70,12 @@ const Checkout = () => {
                     } else {
                         toast.error('Could not determine address', { id: 'locating' });
                     }
-                } catch (err) {
+                } catch (_err) {
                     toast.error('Failed to get address from location', { id: 'locating' });
                 }
                 setLocating(false);
             },
-            (error) => {
+            (_error) => {
                 setLocating(false);
                 toast.error('Unable to get your location. Please enable location access.', { id: 'locating' });
             },
@@ -111,7 +111,7 @@ const Checkout = () => {
                         toast.success('💰 Payment successful! Booking confirmed.', { id: 'payment', duration: 5000 });
                         clearCart();
                         navigate('/bookings');
-                    } catch (err) {
+                    } catch (_err) {
                         toast.error('Payment verification failed. Contact support.', { id: 'payment' });
                     }
                 },

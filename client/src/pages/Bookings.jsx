@@ -31,7 +31,7 @@ const Bookings = () => {
             if (filter) params.status = filter;
             const { data } = await API.get('/bookings', { params });
             setBookings(data.data);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to load bookings');
         } finally {
             setLoading(false);

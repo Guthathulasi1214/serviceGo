@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { Search, MapPin, ShoppingCart, User, ChevronDown, LogOut, Package, LayoutDashboard, Shield, Menu, X, Loader2 } from 'lucide-react';
+import { Search, MapPin, ShoppingCart, User, ChevronDown, LogOut, Package, LayoutDashboard, Shield, Loader2 } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -10,7 +10,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [showMobile, setShowMobile] = useState(false);
     const [location, setLocation] = useState(() => localStorage.getItem('sg_location') || '');
     const [locLoading, setLocLoading] = useState(false);
     const [showLocDropdown, setShowLocDropdown] = useState(false);

@@ -68,9 +68,9 @@ const ProviderDashboard = () => {
                 try {
                     const revRes = await API.get(`/reviews/provider/${user._id}`);
                     setReviews(revRes.data.data || []);
-                } catch (e) { /* no reviews yet */ }
+                } catch (_e) { /* no reviews yet */ }
             }
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to load data');
         } finally {
             setLoading(false);
@@ -96,7 +96,7 @@ const ProviderDashboard = () => {
             await API.delete(`/services/${id}`);
             toast.success('Service deleted');
             fetchData();
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to delete');
         }
     };
@@ -196,7 +196,7 @@ const ProviderDashboard = () => {
         arrived: ['in-progress'],
     };
 
-    const categories = ['plumbing', 'cleaning', 'electrical', 'beauty', 'painting', 'carpentry', 'pest-control', 'appliance-repair', 'other'];
+
 
     if (loading) {
         return (
@@ -509,7 +509,7 @@ const ProviderDashboard = () => {
                                                         try {
                                                             const { data } = await API.post('/payments/qr', { bookingId: b._id });
                                                             setQrCodes(prev => ({ ...prev, [b._id]: data.data }));
-                                                        } catch (err) {
+                                                        } catch (_err) {
                                                             toast.error('Failed to generate QR');
                                                         } finally {
                                                             setQrLoadingMap(prev => ({ ...prev, [b._id]: false }));
@@ -534,7 +534,7 @@ const ProviderDashboard = () => {
                                                                 toast.success('💰 Payment confirmed & booking completed!');
                                                                 setQrCodes(prev => { const n = { ...prev }; delete n[b._id]; return n; });
                                                                 fetchData();
-                                                            } catch (err) {
+                                                            } catch (_err) {
                                                                 toast.error('Failed to confirm payment');
                                                             } finally {
                                                                 setPayConfirmingMap(prev => ({ ...prev, [b._id]: false }));

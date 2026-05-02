@@ -127,7 +127,7 @@ const LiveTracking = () => {
         try {
             const { data } = await API.get(`/bookings/${bookingId}`);
             setBooking(data.data);
-        } catch (err) {
+        } catch (_err) {
             toast.error('Failed to load booking');
         } finally {
             setLoading(false);

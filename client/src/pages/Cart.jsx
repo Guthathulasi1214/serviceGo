@@ -1,13 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, ShoppingCart } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const Cart = () => {
-    const { items, removeFromCart, updateQuantity, totalAmount, clearCart } = useCart();
-    const { user } = useAuth();
-    const navigate = useNavigate();
+    const { items, removeFromCart, updateQuantity, totalAmount } = useCart();
 
     if (items.length === 0) {
         return (

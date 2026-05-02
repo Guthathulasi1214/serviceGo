@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const ConsumerDashboard = () => {
     const { user } = useAuth();
     const [recentBookings, setRecentBookings] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [, setLoading] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const socketRef = useRef(null);
 
@@ -74,7 +74,7 @@ const ConsumerDashboard = () => {
         try {
             const { data } = await API.get('/bookings', { params: { limit: 10 } });
             setRecentBookings(data.data || []);
-        } catch (err) {
+        } catch (_err) {
             console.error('Failed to fetch bookings');
         } finally {
             setLoading(false);

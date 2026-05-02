@@ -24,7 +24,7 @@ const Register = () => {
         }
         setLoading(true);
         try {
-            const { confirmPassword, ...data } = formData;
+            const { confirmPassword: _confirmPassword, ...data } = formData;
             const user = await register(data);
             toast.success(`Welcome, ${user.name}!`);
             switch (user.role) {
